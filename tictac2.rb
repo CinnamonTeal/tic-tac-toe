@@ -20,56 +20,161 @@ conditions, that if anyone was true, would end the loop. For example if A1,A2,A3
 that seems cumbersome though, because there are a lot of possible conditions I'd have to list...
 	
 =end
+puts "******************************************************************************************"
+puts ""
+puts "!!!!Welcome to Tic Tac Toe!!!!" 
+puts ""
+puts "Do you want to play against me (the computer) or a human?"
+puts "Please type 'computer' or 'human.'"
+mode = gets.chomp
 
-puts "Welcome to Tic Tac Toe! Please type 'x' or 'o' to select your player."
-user = gets.chomp
+while mode != "computer" &&  mode != "human"
+	puts "Sorry, but you must type exactly the words 'computer' or 'human. Let's see if we can get it right this time."
+	puts "Please type EXACTLY 'computer' or 'human.'"
+	mode = gets.chomp
+end
 
-while user != 'x' && user != 'o'
-	puts "Hey, this ain't burger king! You can't have it your way! Type 'x' or 'o'."
+if mode == "computer"
+	puts ""
+	puts "--------------------------------------------------------------------------------------"
+	puts "Great! Let's play!"
+	puts "Please type 'x' or 'o' to select your player."
 	user = gets.chomp
-end	
-	puts "Great! You're '#{user}'. Traditionally, 'o' gets to go first."
-	if user == "o"
-		puts "That means you get to go first!"
-		puts " "
-		puts "The tic tac toe board is divided into a 9 square grid."
-		puts "   
-   0  1  2
-A __|__|__
-B __|__|__
-C   |  | 
-			"   
-		puts "To make a move, please type the row and column where you want to make your move:"
-		puts "Which row? (type a, b, or c)."
-			user_row = gets.chomp
-		puts "Which column? (type 0, 1, or 2)."
-			user_column = gets.to_i
 
-	else user == 'x'
-		puts "That means I get to go first."
+	while user != 'x' &&  user != 'o'
+		puts "Hey, this ain't burger king! You can't have it your way! Type 'x' or 'o'."
+		user = gets.chomp
+	end	
+		puts ""
+		puts "--------------------------------------------------------------------------------------"
+		puts "Great! You're '#{user}'. Traditionally, 'o' gets to go first."
+		if user == "o"
+			puts "That means you get to go first!"
+			puts " "
+			puts "The tic tac toe board is divided into a 9 square grid."
+			puts "   
+	   0  1  2
+	A __|__|__
+	B __|__|__
+	C   |  | 
+				"   
+
+
+			puts "To make a move, please type the row and column where you want to make your move:"
+			# Prompting the user for row, so ruby can determine which array to update.
+			puts "Which row? (type a, b, or c)."
+				user_row = gets.chomp
+
+				while user_row != "a"  && user_row != "b"  && user_row != "c"
+					puts "Hey! Pay attention! Only a, b, or c are valid choices."
+					puts "Which row? (type a, b, or c)."	
+					user_row = gets.chomp
+				end
+			# Prompting the user for column, so ruby can determine which element in the array to update.	
+			puts "Which column? (type 0, 1, or 2)."
+				user_column = gets.to_i		# I found an interesting bug here where entering a letter evaluates as 0 automatically.
+				while user_column != 0  && user_column != 1  && user_column != 2
+					puts "Hey! Follow instructions! Only 0, 1, or 2 are valid choices."
+					puts "Which column? (type 0, 1, or 2)."
+					user_column = gets.to_i
+				end
+
+		else user == 'x'
+			puts "That means I get to go first."
+		end
+
+	a = [" "," "," "]
+	b = [" "," "," "]
+	c = [" "," "," "]
+
+
+
+	if user_row == "a"
+		a.delete_at(user_column)
+		a.insert(user_column, user)
+	elsif user_row == "b"
+		b.delete_at(user_column)
+		b.insert(user_column, user)
+	elsif user_row == "c"
+		c.delete_at(user_column)
+		c.insert(user_column, user)
 	end
+			
+	p a, b, c			# prints arrays a, b, and c.
+
+
+
+elsif mode == "human"
+	puts ""
+	puts "--------------------------------------------------------------------------------------"
+	puts "Aww, bummer. Okay then you two will have to take turns."	
+	puts "Please type 'x' or 'o' to select your player."
+	user = gets.chomp
+
+	while user != 'x' &&  user != 'o'
+		puts "Hey, this ain't burger king! You can't have it your way! Type 'x' or 'o'."
+		user = gets.chomp
+	end	
+		puts ""
+		puts "--------------------------------------------------------------------------------------"
+		puts "Great! You're '#{user}'. Traditionally, 'o' gets to go first."
+		if user == "o"
+			puts "That means you get to go first!"
+			puts " "
+			puts "The tic tac toe board is divided into a 9 square grid."
+			puts "   
+	   0  1  2
+	A __|__|__
+	B __|__|__
+	C   |  | 
+				"   
+			puts "To make a move, please type the row and column where you want to make your move:"
+			# Prompting the user for row, so ruby can determine which array to update.
+			puts "Which row? (type a, b, or c)."
+				user_row = gets.chomp
+
+				while user_row != "a"  && user_row != "b"  && user_row != "c"
+					puts "Hey! Pay attention! Only a, b, or c are valid choices."
+					puts "Which row? (type a, b, or c)."	
+					user_row = gets.chomp
+				end
+			# Prompting the user for column, so ruby can determine which element in the array to update.	
+			puts "Which column? (type 0, 1, or 2)."
+				user_column = gets.to_i		# I found an interesting bug here where entering a letter evaluates as 0 automatically.
+				while user_column != 0  && user_column != 1  && user_column != 2
+					puts "Hey! Follow instructions! Only 0, 1, or 2 are valid choices."
+					puts "Which column? (type 0, 1, or 2)."
+					user_column = gets.to_i
+				end
+		end
+	a = [" "," "," "]
+	b = [" "," "," "]
+	c = [" "," "," "]
+
+
+	if user_row == "a"
+		a.delete_at(user_column)
+		a.insert(user_column, user)
+	elsif user_row == "b"
+		b.delete_at(user_column)
+		b.insert(user_column, user)
+	elsif user_row == "c"
+		c.delete_at(user_column)
+		c.insert(user_column, user)
+	end
+		
+	p a, b, c			# prints arrays a, b, and c.
+
+
+end
+
+
+
+
 # ok so 2 problems to solve right now: first, I need to make the loop go until a certain number of turns
 # and second, I need to solve the problem of human vs computer turns, like, how to make the computer turn
 # and/or prompt for two player mode. 
 
-
-a = [" "," "," "]
-b = [" "," "," "]
-c = [" "," "," "]
-
-
-if user_row == "a"
-	a.delete_at(user_column)
-	a.insert(user_column, user)
-elsif user_row == "b"
-	b.delete_at(user_column)
-	b.insert(user_column, user)
-elsif user_row == "c"
-	c.delete_at(user_column)
-	c.insert(user_column, user)
-end
-		
-p a, b, c			# prints arrays a, b, and c.
 
       
 =begin
@@ -127,7 +232,8 @@ Resources:
 		seems useful:
 			- arr.at(0) #=> 1 		# using the 'at' method accesses a particular array element
 			- arr.fetch(100, "oops") #=> "oops"		 # seems to raise an error when an arguemt given is beyond the array boundaries
-			- push method updates array, I believe like: my_array.push(user_move)		# question is where in the array does this push to? or is that what the argument is supposed to specify?
+			- push method updates array, I believe like: my_array.push(user_move)		# question is where in the array does this push to? 
+				or is that what the argument is supposed to specify?
 			- the << operator is also push. 
 	2. http://www.peachpit.com/articles/article.aspx?p=1278994&seqNum=3
 		I found the array.insert(element, content) method here.
