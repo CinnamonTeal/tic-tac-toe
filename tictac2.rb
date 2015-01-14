@@ -128,6 +128,14 @@ elsif mode == "human"
 	B __|__|__
 	C   |  | 
 				"   
+
+class Move  # maybe in the morning when I can think again I'll remember how I wanted to use this...
+	def initialize(row, column)
+		@row = row
+		@column = column
+	end
+end
+
 			puts "To make a move, please type the row and column where you want to make your move:"
 			# Prompting the user for row, so ruby can determine which array to update.
 			puts "Which row? (type a, b, or c)."
@@ -175,7 +183,8 @@ end
 # and second, I need to solve the problem of human vs computer turns, like, how to make the computer turn
 # and/or prompt for two player mode. 
 
-
+# isn't there some way I can create a class, and then just call instances of that class, rather than
+# having doubles of practically all of my code?
       
 =begin
 a bit stumped right now... I wish I could figure out how to make the game look like this:
