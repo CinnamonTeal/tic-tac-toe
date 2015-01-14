@@ -32,7 +32,7 @@ class H_Move
 end
 
 # Computer-move class
-class C_move
+class C_Move
 	def initialize
 		a.sample.attr_writer(computer)		# although it seems like attr_writer can be chained in this way, it might not be the best way to do this.
 
@@ -64,7 +64,7 @@ class Game_update
 	p a, b, c		
 end
 
-
+# Enter main game logic
 puts "******************************************************************************************"
 puts ""
 puts "!!!!  Welcome to Tic Tac Toe  !!!!" 
@@ -73,6 +73,7 @@ puts "Do you want to play against me (the computer) or a human?"
 puts "Please type 'computer' or 'human.'"
 mode = gets.chomp
 
+# forces single player or 2 player mode selection
 while mode != "computer" &&  mode != "human"
 	puts "Sorry, but you must type exactly the words 'computer' or 'human. Let's see if we can get it right this time."
 	puts "Please type EXACTLY 'computer' or 'human.'"
@@ -97,16 +98,17 @@ if mode == "computer"
 		user = gets.chomp	# user gamepiece stored as user variable, so it can be called for each turn.
 	end	
 
-# Assign computer gamepiece; dependent upon human gamepiece selection.
-if user == "x"
-	computer = "o"
-else
-	computer = "x"
-end
+	# Assign computer gamepiece; dependent upon human gamepiece selection.
+	if user == "x"
+		computer = "o"
+	else
+		computer = "x"
+	end
 
-		puts ""
-		puts "--------------------------------------------------------------------------------------"
-		puts "Great! You're '#{user}'. Traditionally, 'o' gets to go first."
+	puts ""
+	puts "--------------------------------------------------------------------------------------"
+	puts "Great! You're '#{user}'. Traditionally, 'o' gets to go first."
+		
 		if user == "o"
 			puts "That means you get to go first!"
 			puts " "
@@ -118,37 +120,17 @@ end
 	C   |  | 
 				"   
 
-			H_Move.new
+		# okay now I need a loop that allows me to toggle between human and computer turns.
+		H_Move.new
+		Game_update.new
+		C_Move.new
+		Game_update.new
 
-=begin
-			puts "To make a move, please type the row and column where you want to make your move:"
-			# Prompting the user for row, so ruby can determine which array to update.
-			puts "Which row? (type a, b, or c)."
-				user_row = gets.chomp
 
-				while user_row != "a"  && user_row != "b"  && user_row != "c"
-					puts "Hey! Pay attention! Only a, b, or c are valid choices."
-					puts "Which row? (type a, b, or c)."	
-					user_row = gets.chomp
-				end
-			# Prompting the user for column, so ruby can determine which element in the array to update.	
-			puts "Which column? (type 0, 1, or 2)."
-				user_column = gets.to_i		# I found an interesting bug here where entering a letter evaluates as 0 automatically.
-				while user_column != 0  && user_column != 1  && user_column != 2
-					puts "Hey! Follow instructions! Only 0, 1, or 2 are valid choices."
-					puts "Which column? (type 0, 1, or 2)."
-					user_column = gets.to_i
-				end
-
-=end
 
 		else user == 'x'
 			puts "That means I get to go first."
 		end
-
-
-
-end
 
 
 #--------------------------------------------------------------------------------------------------
@@ -165,9 +147,9 @@ elsif mode == "human"
 	
 	puts ""
 	puts "--------------------------------------------------------------------------------------"
-	puts "Aww, bummer. Okay then you two will have to take turns."		
+	puts "Aww, bummer. Okay then, you two will have to take turns."		
 	puts ""
-	puts "Traditionally, 'o' gets to go first. So decide amongst yourselves who will be Player 1."
+	puts "Traditionally, 'o' gets to go first, so decide amongst yourselves who will be Player 1."
 			
 	puts " "
 	puts "The tic tac toe board is divided into a 9 square grid."
@@ -177,29 +159,11 @@ elsif mode == "human"
 	B __|__|__
 	C   |  | 
 				"   
-=begin
-	puts "To make a move, please type the row and column where you want to make your move:"
-	# Prompting player1 for row, so ruby can determine which array to update.
-	puts "Which row? (type a, b, or c)."
-		1p_row = gets.chomp
-
-		while 1p_row != "a"  && 1p_row != "b"  && 1p_row != "c"
-			puts "Hey! Pay attention! Only a, b, or c are valid choices."
-			puts "Which row? (type a, b, or c)."	
-			1p_row = gets.chomp
-		end
-	# Prompting the player1 for column, so ruby can determine which element in the array to update.	
-	puts "Which column? (type 0, 1, or 2)."
-		1p_column = gets.to_i		# I found an interesting bug here where entering a letter evaluates as 0 automatically.
-		while 1p_column != 0  && 1p_column != 1  && 1p_column != 2
-			puts "Hey! Follow instructions! Only 0, 1, or 2 are valid choices."
-			puts "Which column? (type 0, 1, or 2)."
-			1p_column = gets.to_i
-		end
-=end
 
 
 end
+end
+
 
 #--------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------
