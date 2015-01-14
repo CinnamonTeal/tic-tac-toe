@@ -55,7 +55,7 @@ puts "B __|__|__"
 puts "C   |  |  "
 
 
-
+multi_d = [[__|__|__],[__|__|__],[  |  |  ]]
 
 
 
@@ -84,6 +84,15 @@ and I will also need a way to limit the next move to available spaces, so that m
 =end
 
 
+=begin
 
-
-
+Resources:
+	- http://www.ruby-doc.org/core-2.2.0/Array.html
+		I looked here to see if there were methods I could use to take input from a user and update the array.
+		I found something on Multi-Dimensional arrays.
+		seems useful:
+			- arr.at(0) #=> 1 		# using the 'at' method accesses a particular array element
+			- arr.fetch(100, "oops") #=> "oops"		 # seems to raise an error when an arguemt given is beyond the array boundaries
+			- push method updates array, I believe like: my_array.push(user_move)		# question is where in the array does this push to? or is that what the argument is supposed to specify?
+			- the << operator is also push. 
+=end
