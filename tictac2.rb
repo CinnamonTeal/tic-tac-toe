@@ -1,25 +1,70 @@
+# Tic-Tac-Toe
 
 
-=begin
+# create 3 arrays as read/writeable gameboard
+# might be a way to just use one multi-dimensional array but this works for now; can improve later.
+	a = [" "," "," "]
+	b = [" "," "," "]
+	c = [" "," "," "]
 
-Second attempt with a simple tic tac toe game, this time without trying to use a library like gosu. 
+# Human-move class, so I can call instances of this rather than repeating it every time I wanna use it.
+class H_Move
+	def initialize
+		puts "To make a move, please type the row and column where you want to make your move:"
+		# Prompting the user for row, so ruby can determine which array to update.
+		puts "Which row? (type a, b, or c)."
+			row = gets.chomp
 
-The Plan: (1st draft)
-At first I am thinking about how to draw a grid in terminal, perhaps using puts or something like that. 
-Then I need to figure out how to assign regions to that grid, maybe using an array or something. I want
-to prompt the user to first choose 'X' or 'O', assign that to a variable which they will use whenever
-they make a move, and from then on prompt the user to choose their region in the grid. At the moment
-I can't think of a cleaner way other than asking the user to specifically enter "A2" or "B3" etc. 
-I will need a loop, that ends when someone gets 3 in a row, and it will need to check that after each turn.
-A loop (or loops) will have to: 1) prompt the user for their move, 2) check to see if they have made 3
-in a row yet, 3) if not, then let the computer move, 4) check to see if 3 in a row yet, if not then
-5) prompt the user again for their move, 6) check again and so forth. 
+			while row != "a"  && row != "b"  && row != "c"
+				puts "Hey! Pay attention! Only a, b, or c are valid choices."
+				puts "Which row? (type a, b, or c)."	
+				row = gets.chomp
+			end
+		# Prompting the user for column, so ruby can determine which element in the array to update.	
+		puts "Which column? (type 0, 1, or 2)."
+			column = gets.to_i		# I found an interesting bug here where entering a letter evaluates as 0 automatically.
+			while column != 0  && column != 1  && column != 2
+				puts "Hey! Follow instructions! Only 0, 1, or 2 are valid choices."
+				puts "Which column? (type 0, 1, or 2)."
+				column = gets.to_i
+			end	
+	end
+end
 
-I need a way to define "3 in a row" in order to end the loop. I could probably write an ugly list of 
-conditions, that if anyone was true, would end the loop. For example if A1,A2,A3 are the same value...
-that seems cumbersome though, because there are a lot of possible conditions I'd have to list...
-	
-=end
+# Computer-move class
+class C_move
+	def initialize
+		a.sample.attr_writer(computer)		# although it seems like attr_writer can be chained in this way, it might not be the best way to do this.
+
+# better might be to:
+# randomly select element from array
+# then store that random selection in a(n instance?) variable
+# then delete_at(stored random element)
+# then << (computer)_at(stored random element)
+	end
+end
+
+# a class to write moves to the gameboard
+class Game_update
+	def initialize
+		# writes the gamepiece to the selected coordinates
+		# delete_at removes that element to make space for insert, so as not to get more than 3 elements
+		# insert places the users gamepiece in the selected column
+		if row == "a"
+			a.delete_at(column)
+			a.insert(column, user)
+		elsif row == "b"
+			b.delete_at(column)
+			b.insert(column, user)
+		elsif row == "c"
+			c.delete_at(column)
+			c.insert(column, user)
+		end
+	# prints the updated gameboard state (arrays a, b, and c).		
+	p a, b, c		
+end
+
+
 puts "******************************************************************************************"
 puts ""
 puts "!!!!  Welcome to Tic Tac Toe  !!!!" 
@@ -52,7 +97,7 @@ if mode == "computer"
 		user = gets.chomp	# user gamepiece stored as user variable, so it can be called for each turn.
 	end	
 
-# Assign computer gamepiece
+# Assign computer gamepiece; dependent upon human gamepiece selection.
 if user == "x"
 	computer = "o"
 else
@@ -73,7 +118,9 @@ end
 	C   |  | 
 				"   
 
+			H_Move.new
 
+=begin
 			puts "To make a move, please type the row and column where you want to make your move:"
 			# Prompting the user for row, so ruby can determine which array to update.
 			puts "Which row? (type a, b, or c)."
@@ -93,28 +140,16 @@ end
 					user_column = gets.to_i
 				end
 
+=end
+
 		else user == 'x'
 			puts "That means I get to go first."
 		end
 
-	a = [" "," "," "]
-	b = [" "," "," "]
-	c = [" "," "," "]
 
 
+end
 
-	if user_row == "a"
-		a.delete_at(user_column)
-		a.insert(user_column, user)
-	elsif user_row == "b"
-		b.delete_at(user_column)
-		b.insert(user_column, user)
-	elsif user_row == "c"
-		c.delete_at(user_column)
-		c.insert(user_column, user)
-	end
-			
-	p a, b, c			# prints arrays a, b, and c.
 
 #--------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------
@@ -163,24 +198,6 @@ elsif mode == "human"
 		end
 =end
 
-	a = [" "," "," "]
-	b = [" "," "," "]
-	c = [" "," "," "]
-
-
-	if user_row == "a"				# Should I make a class out of this? 
-		a.delete_at(user_column)
-		a.insert(user_column, user)
-	elsif user_row == "b"
-		b.delete_at(user_column)
-		b.insert(user_column, user)
-	elsif user_row == "c"
-		c.delete_at(user_column)
-		c.insert(user_column, user)
-	end
-		
-	p a, b, c			# prints arrays a, b, and c.
-
 
 end
 
@@ -189,10 +206,17 @@ end
 #--------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------
 
-
-
-
 # scratch paper / workspace below (so I can experiment without breaking the code above)
+
+
+=begin
+Main Game loop must 
+	1) prompt the user for their move, 
+	2) check to see if they have made 3 in a row yet, 
+	3) if not, then let the computer move, 
+	4) check to see if 3 in a row yet, if not then
+	5) prompt the user again for their move, 6) check again and so forth. 
+=end
 
 
 # To-do:
@@ -214,45 +238,10 @@ end
 #  		having doubles of practically all of my code?
 
 
+# Create "check for victory condition loop" - figure out how to define "3 in a row" in order to end the game loop. I could probably write an ugly list of 
+# 		conditions, that if anyone was true, would end the loop. For example if A1,A2,A3 are the same value...
+# 		that seems cumbersome though, because there (8?) possible conditions I'd have to list...
 
-# Human-move class, so I can call instanes of this rather than repeating it every time I wanna use it.
-class H_Move
-	def initialize
-		puts "To make a move, please type the row and column where you want to make your move:"
-		# Prompting the user for row, so ruby can determine which array to update.
-		puts "Which row? (type a, b, or c)."
-			row = gets.chomp
-
-			while row != "a"  && row != "b"  && row != "c"
-				puts "Hey! Pay attention! Only a, b, or c are valid choices."
-				puts "Which row? (type a, b, or c)."	
-				row = gets.chomp
-			end
-		# Prompting the user for column, so ruby can determine which element in the array to update.	
-		puts "Which column? (type 0, 1, or 2)."
-			column = gets.to_i		# I found an interesting bug here where entering a letter evaluates as 0 automatically.
-			while column != 0  && column != 1  && column != 2
-				puts "Hey! Follow instructions! Only 0, 1, or 2 are valid choices."
-				puts "Which column? (type 0, 1, or 2)."
-				column = gets.to_i
-			end	
-	end
-end
-
-# Computer-move class
-      # COMPUTER MOVE:
-
-class C_move
-	def initialize
-		a.sample.attr_writer(computer)		# although it seems like attr_writer can be chained in this way, it might not be the best way to do this.
-
-# better might be to:
-# randomly select element from array
-# then store that random selection in a(n instance?) variable
-# then delete_at(stored random element)
-# then << (computer)_at(stored random element)
-	end
-end
 
 
 =begin
