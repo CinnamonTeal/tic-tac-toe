@@ -49,8 +49,16 @@ if mode == "computer"
 
 	while user != 'x' &&  user != 'o'
 		puts "Hey, this ain't burger king! You can't have it your way! Type 'x' or 'o'."
-		user = gets.chomp
+		user = gets.chomp	# user gamepiece stored as user variable, so it can be called for each turn.
 	end	
+
+# Assign computer gamepiece
+if user == "x"
+	computer = "o"
+else
+	computer = "x"
+end
+
 		puts ""
 		puts "--------------------------------------------------------------------------------------"
 		puts "Great! You're '#{user}'. Traditionally, 'o' gets to go first."
@@ -114,51 +122,45 @@ if mode == "computer"
 #--------------------------------------------------------------------------------------------------
 
 elsif mode == "human"
+	
+	1player = "o"
+	2player = "x"
+
 	puts ""
 	puts "--------------------------------------------------------------------------------------"
-	puts "Aww, bummer. Okay then you two will have to take turns."	
-	puts "Please type 'x' or 'o' to select your player."
-	user = gets.chomp
-
-	while user != 'x' &&  user != 'o'
-		puts "Hey, this ain't burger king! You can't have it your way! Type 'x' or 'o'."
-		user = gets.chomp
-	end	
-		puts ""
-		puts "--------------------------------------------------------------------------------------"
-		puts "Great! You're '#{user}'. Traditionally, 'o' gets to go first."
-		if user == "o"
-			puts "That means you get to go first!"
-			puts " "
-			puts "The tic tac toe board is divided into a 9 square grid."
-			puts "   
+	puts "Aww, bummer. Okay then you two will have to take turns."		
+	puts ""
+	puts "Traditionally, 'o' gets to go first. So decide amongst yourselves who will be Player 1."
+			
+	puts " "
+	puts "The tic tac toe board is divided into a 9 square grid."
+	puts "   
 	   0  1  2
 	A __|__|__
 	B __|__|__
 	C   |  | 
 				"   
 
+	puts "To make a move, please type the row and column where you want to make your move:"
+	# Prompting player1 for row, so ruby can determine which array to update.
+	puts "Which row? (type a, b, or c)."
+		1p_row = gets.chomp
 
-
-			puts "To make a move, please type the row and column where you want to make your move:"
-			# Prompting the user for row, so ruby can determine which array to update.
-			puts "Which row? (type a, b, or c)."
-				user_row = gets.chomp
-
-				while user_row != "a"  && user_row != "b"  && user_row != "c"
-					puts "Hey! Pay attention! Only a, b, or c are valid choices."
-					puts "Which row? (type a, b, or c)."	
-					user_row = gets.chomp
-				end
-			# Prompting the user for column, so ruby can determine which element in the array to update.	
-			puts "Which column? (type 0, 1, or 2)."
-				user_column = gets.to_i		# I found an interesting bug here where entering a letter evaluates as 0 automatically.
-				while user_column != 0  && user_column != 1  && user_column != 2
-					puts "Hey! Follow instructions! Only 0, 1, or 2 are valid choices."
-					puts "Which column? (type 0, 1, or 2)."
-					user_column = gets.to_i
-				end
+		while 1p_row != "a"  && 1p_row != "b"  && 1p_row != "c"
+			puts "Hey! Pay attention! Only a, b, or c are valid choices."
+			puts "Which row? (type a, b, or c)."	
+			1p_row = gets.chomp
 		end
+	# Prompting the player1 for column, so ruby can determine which element in the array to update.	
+	puts "Which column? (type 0, 1, or 2)."
+		1p_column = gets.to_i		# I found an interesting bug here where entering a letter evaluates as 0 automatically.
+		while 1p_column != 0  && 1p_column != 1  && 1p_column != 2
+			puts "Hey! Follow instructions! Only 0, 1, or 2 are valid choices."
+			puts "Which column? (type 0, 1, or 2)."
+			1p_column = gets.to_i
+		end
+
+
 	a = [" "," "," "]
 	b = [" "," "," "]
 	c = [" "," "," "]
@@ -182,6 +184,12 @@ elsif mode == "human"
 #--------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------
 
+
+
+
+# scratch paper / workspace below (so I can experiment without breaking the code above)
+
+
 end
 
 class Move  # maybe create a class for human move and computer move? or player 1 and player 2 move? Then call new instances of each class per turn? 
@@ -197,61 +205,64 @@ end
 a.sample.attr_writer(computer)
 
 
-# also need variables for player 1 and player 2 in human vs human mode.
 
+# To-do:
 
+# Make the human turn code loop until a certain number of turns, trading back and forth with computer turn
+# Solve the problem toggling between human vs computer turn
+# Fix the bug where gets.to_i allows any letter string to evaluate as 0 when prompting for column selection.
 
+# Create an if user == x, then computer == o and vice versa statement somewhere, to make sure
+# 		I can assign the opposite character to the array for each computer move
 
+# Figure out how to limit the new moves to available spaces, so that moves don't overwrite each other.
 
-# ok so 2 problems to solve right now: first, I need to make the loop go until a certain number of turns
-# and second, I need to solve the problem of human vs computer turns, like, how to make the computer turn
-# and/or prompt for two player mode. 
+# Write different turn taking mechanism for 2 player mode (toggle between player 1 and 2 turns).
+# 		(will need variables for player 1 and player 2 in human vs human mode.)
+
 
 # isn't there some way I can create a class, and then just call instances of that class, rather than
-# having doubles of practically all of my code?
+#  		having doubles of practically all of my code?
+
+=begin
+
+this chunk of code is repeated at least twice in my program... how can I turn this into a class or some other object?
+
+			puts "To make a move, please type the row and column where you want to make your move:"
+			# Prompting the user for row, so ruby can determine which array to update.
+			puts "Which row? (type a, b, or c)."
+				user_row = gets.chomp
+
+				while user_row != "a"  && user_row != "b"  && user_row != "c"
+					puts "Hey! Pay attention! Only a, b, or c are valid choices."
+					puts "Which row? (type a, b, or c)."	
+					user_row = gets.chomp
+				end
+			# Prompting the user for column, so ruby can determine which element in the array to update.	
+			puts "Which column? (type 0, 1, or 2)."
+				user_column = gets.to_i		# I found an interesting bug here where entering a letter evaluates as 0 automatically.
+				while user_column != 0  && user_column != 1  && user_column != 2
+					puts "Hey! Follow instructions! Only 0, 1, or 2 are valid choices."
+					puts "Which column? (type 0, 1, or 2)."
+					user_column = gets.to_i
+				end	
+
+=end
+
       
 =begin
 a bit stumped right now... I wish I could figure out how to make the game look like this:
 
-   0  1  2
-A o_|x_|o_
-B __|o_|o_
-C x |  |x 
+		   0  1  2
+		A o_|x_|o_
+		B __|o_|o_
+		C x |  |x 
 
 instead of like this: 
 
-["o", " ", " "]
-[" ", " ", "x"]
-[" ", " ", " "]
-
-=end
-
-
-
-# I need something that allows me to take input from a user, and put a predetermined variable into an array,
-# according to whatever the user just input. For example, user types 'a2' and I need to put an 'x' in
-# position a2 of the array, or the hash, or whatever...  
-
-# also it would be nice to have single player and 2 player mode, but that's less important, I can add that at the end if there's time...
-
-
-
-=begin
-so it needs to look like
-
-user = x 
-puts "your turn, type your coordinates"
-user_move = gets.chomp 
-
-
-=end
-
-=begin
-oh yeah, and I need an if user == x, then computer == o and vice versa statement somewhere, to make sure
-I can assign the opposite character to the array for each computer move
-
-and I will also need a way to limit the next move to available spaces, so that moves don't overwrite each other
-
+		["o", " ", " "]
+		[" ", " ", "x"]
+		[" ", " ", " "]
 
 =end
 
