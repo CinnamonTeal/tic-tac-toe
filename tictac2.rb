@@ -34,21 +34,23 @@ end
 		puts " "
 		puts "The tic tac toe board is divided into a 9 square grid."
 		puts "   
-   1  2  3
+   0  1  2
 A __|__|__
 B __|__|__
-C   |  |  
+C   |  | 
 			"   
 		puts "To make a move, please type the row and column where you want to make your move:"
 		puts "Which row? (type a, b, or c)."
 			user_row = gets.chomp
-		puts "Which column? (type 1, 2, or 3)."
+		puts "Which column? (type 0, 1, or 2)."
 			user_column = gets.to_i
 
 	else user == 'x'
 		puts "That means I get to go first."
 	end
-
+# ok so 2 problems to solve right now: first, I need to make the loop go until a certain number of turns
+# and second, I need to solve the problem of human vs computer turns, like, how to make the computer turn
+# and/or prompt for two player mode. 
 
 
 a = [" "," "," "]
@@ -57,28 +59,34 @@ c = [" "," "," "]
 
 
 if user_row == "a"
+	a.delete_at(user_column)
 	a.insert(user_column, user)
 elsif user_row == "b"
+	b.delete_at(user_column)
 	b.insert(user_column, user)
 elsif user_row == "c"
+	c.delete_at(user_column)
 	c.insert(user_column, user)
 end
 		
-p a
-p b
-p c
+p a, b, c			# prints arrays a, b, and c.
 
-       
+      
+=begin
+a bit stumped right now... I wish I could figure out how to make the game look like this:
 
+   0  1  2
+A o_|x_|o_
+B __|o_|o_
+C x |  |x 
 
+instead of like this: 
 
-puts "   1  2  3"   
-puts "A __|__|__"	# is this better to do as one string?
-puts "B __|__|__"	# or as multiple strings? Maybe with multiple lines we can do string_to.a more easily?
-puts "C   |  |  "
+["o", " ", " "]
+[" ", " ", "x"]
+[" ", " ", " "]
 
-
-
+=end
 
 
 
@@ -113,7 +121,7 @@ and I will also need a way to limit the next move to available spaces, so that m
 =begin
 
 Resources:
-	- http://www.ruby-doc.org/core-2.2.0/Array.html
+	1. http://www.ruby-doc.org/core-2.2.0/Array.html
 		I looked here to see if there were methods I could use to take input from a user and update the array.
 		I found something on Multi-Dimensional arrays.
 		seems useful:
@@ -121,6 +129,10 @@ Resources:
 			- arr.fetch(100, "oops") #=> "oops"		 # seems to raise an error when an arguemt given is beyond the array boundaries
 			- push method updates array, I believe like: my_array.push(user_move)		# question is where in the array does this push to? or is that what the argument is supposed to specify?
 			- the << operator is also push. 
-	- http://www.peachpit.com/articles/article.aspx?p=1278994&seqNum=3
+	2. http://www.peachpit.com/articles/article.aspx?p=1278994&seqNum=3
 		I found the array.insert(element, content) method here.
+	3. https://stackoverflow.com/questions/15784503/ruby-method-to-print-and-neat-an-array
+		I found the p method for printing (and inspecting) an array
+
+
 =end
