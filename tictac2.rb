@@ -40,6 +40,18 @@ end
 		puts "That means I get to go first."
 	end
 
+# or maybe as first for the row, set the row to a variable, then ask for the column, and set that to a variable,
+# then use those two variables to access and update the array?
+
+# I guess in a worst case scenario, we can just make the user manually redraw the whole thing each time 
+# and keep reprinting the string... (sucks).
+
+array = [" "," "," "," ",]
+
+a = [1,2,3]
+b = [1,2,3]
+c = [1,2,3]
+
 puts "   
    1  2  3
 A __|__|__
@@ -55,7 +67,6 @@ puts "B __|__|__"
 puts "C   |  |  "
 
 
-multi_d = [[__|__|__],[__|__|__],[  |  |  ]]
 
 
 
@@ -63,6 +74,10 @@ multi_d = [[__|__|__],[__|__|__],[  |  |  ]]
 # I need something that allows me to take input from a user, and put a predetermined variable into an array,
 # according to whatever the user just input. For example, user types 'a2' and I need to put an 'x' in
 # position a2 of the array, or the hash, or whatever...  
+
+# also it would be nice to have single player and 2 player mode, but that's less important, I can add that at the end if there's time...
+
+
 
 =begin
 so it needs to look like
