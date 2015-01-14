@@ -33,37 +33,48 @@ end
 		puts "That means you get to go first!"
 		puts " "
 		puts "The tic tac toe board is divided into a 9 square grid."
-		puts "To make a move, please type the coordinates you choose, with the letter first, then the number."
-		puts "For example: 'c3' is a valid move, but not 3c."
-		umove = gets.chomp	
-	else user == 'x'
-		puts "That means I get to go first."
-	end
-
-# or maybe as first for the row, set the row to a variable, then ask for the column, and set that to a variable,
-# then use those two variables to access and update the array?
-
-# I guess in a worst case scenario, we can just make the user manually redraw the whole thing each time 
-# and keep reprinting the string... (sucks).
-
-array = [" "," "," "," ",]
-
-a = [1,2,3]
-b = [1,2,3]
-c = [1,2,3]
-
-puts "   
+		puts "   
    1  2  3
 A __|__|__
 B __|__|__
 C   |  |  
-			"          # is this better to do as one string?
+			"   
+		puts "To make a move, please type the row and column where you want to make your move:"
+		puts "Which row? (type a, b, or c)."
+			user_row = gets.chomp
+		puts "Which column? (type 1, 2, or 3)."
+			user_column = gets.to_i
+
+	else user == 'x'
+		puts "That means I get to go first."
+	end
 
 
 
-puts "   1  2  3"      # or as multiple strings? Maybe with multiple lines we can do string_to.a more easily?
-puts "A __|__|__"
-puts "B __|__|__"
+a = [" "," "," "]
+b = [" "," "," "]
+c = [" "," "," "]
+
+
+if user_row == "a"
+	a.insert(user_column, user)
+elsif user_row == "b"
+	b.insert(user_column, user)
+elsif user_row == "c"
+	c.insert(user_column, user)
+end
+		
+p a
+p b
+p c
+
+       
+
+
+
+puts "   1  2  3"   
+puts "A __|__|__"	# is this better to do as one string?
+puts "B __|__|__"	# or as multiple strings? Maybe with multiple lines we can do string_to.a more easily?
 puts "C   |  |  "
 
 
@@ -110,4 +121,6 @@ Resources:
 			- arr.fetch(100, "oops") #=> "oops"		 # seems to raise an error when an arguemt given is beyond the array boundaries
 			- push method updates array, I believe like: my_array.push(user_move)		# question is where in the array does this push to? or is that what the argument is supposed to specify?
 			- the << operator is also push. 
+	- http://www.peachpit.com/articles/article.aspx?p=1278994&seqNum=3
+		I found the array.insert(element, content) method here.
 =end
