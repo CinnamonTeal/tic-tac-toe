@@ -22,7 +22,7 @@ that seems cumbersome though, because there are a lot of possible conditions I'd
 =end
 puts "******************************************************************************************"
 puts ""
-puts "!!!!Welcome to Tic Tac Toe!!!!" 
+puts "!!!!  Welcome to Tic Tac Toe  !!!!" 
 puts ""
 puts "Do you want to play against me (the computer) or a human?"
 puts "Please type 'computer' or 'human.'"
@@ -33,6 +33,12 @@ while mode != "computer" &&  mode != "human"
 	puts "Please type EXACTLY 'computer' or 'human.'"
 	mode = gets.chomp
 end
+
+
+#--------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------
 
 if mode == "computer"
 	puts ""
@@ -102,7 +108,10 @@ if mode == "computer"
 			
 	p a, b, c			# prints arrays a, b, and c.
 
-
+#--------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------
 
 elsif mode == "human"
 	puts ""
@@ -129,12 +138,7 @@ elsif mode == "human"
 	C   |  | 
 				"   
 
-class Move  # maybe in the morning when I can think again I'll remember how I wanted to use this...
-	def initialize(row, column)
-		@row = row
-		@column = column
-	end
-end
+
 
 			puts "To make a move, please type the row and column where you want to make your move:"
 			# Prompting the user for row, so ruby can determine which array to update.
@@ -160,7 +164,7 @@ end
 	c = [" "," "," "]
 
 
-	if user_row == "a"
+	if user_row == "a"				# Should I make a class out of this? 
 		a.delete_at(user_column)
 		a.insert(user_column, user)
 	elsif user_row == "b"
@@ -173,8 +177,28 @@ end
 		
 	p a, b, c			# prints arrays a, b, and c.
 
+#--------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------
 
 end
+
+class Move  # maybe create a class for human move and computer move? or player 1 and player 2 move? Then call new instances of each class per turn? 
+	def initialize(row, column)
+		@row = row
+		@column = column
+	end
+end
+
+
+
+# Computer move
+a.sample.attr_writer(computer)
+
+
+# also need variables for player 1 and player 2 in human vs human mode.
+
 
 
 
@@ -248,6 +272,8 @@ Resources:
 		I found the array.insert(element, content) method here.
 	3. https://stackoverflow.com/questions/15784503/ruby-method-to-print-and-neat-an-array
 		I found the p method for printing (and inspecting) an array
+	4. http://www.sitepoint.com/tour-random-ruby/
+		I found the ".sample" method for getting a random element from an array (to use as computer move).
 
 
 =end
