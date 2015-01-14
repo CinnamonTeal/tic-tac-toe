@@ -123,9 +123,11 @@ end
 
 elsif mode == "human"
 	
-	1player = "o"
-	2player = "x"
-
+		
+	@player1 = "o"
+	@player2 = "x"
+	
+	
 	puts ""
 	puts "--------------------------------------------------------------------------------------"
 	puts "Aww, bummer. Okay then you two will have to take turns."		
@@ -140,7 +142,7 @@ elsif mode == "human"
 	B __|__|__
 	C   |  | 
 				"   
-
+=begin
 	puts "To make a move, please type the row and column where you want to make your move:"
 	# Prompting player1 for row, so ruby can determine which array to update.
 	puts "Which row? (type a, b, or c)."
@@ -159,7 +161,7 @@ elsif mode == "human"
 			puts "Which column? (type 0, 1, or 2)."
 			1p_column = gets.to_i
 		end
-
+=end
 
 	a = [" "," "," "]
 	b = [" "," "," "]
@@ -179,6 +181,9 @@ elsif mode == "human"
 		
 	p a, b, c			# prints arrays a, b, and c.
 
+
+end
+
 #--------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------
@@ -188,22 +193,6 @@ elsif mode == "human"
 
 
 # scratch paper / workspace below (so I can experiment without breaking the code above)
-
-
-end
-
-class Move  # maybe create a class for human move and computer move? or player 1 and player 2 move? Then call new instances of each class per turn? 
-	def initialize(row, column)
-		@row = row
-		@column = column
-	end
-end
-
-
-
-# Computer move
-a.sample.attr_writer(computer)
-
 
 
 # To-do:
@@ -224,32 +213,48 @@ a.sample.attr_writer(computer)
 # isn't there some way I can create a class, and then just call instances of that class, rather than
 #  		having doubles of practically all of my code?
 
-=begin
 
-this chunk of code is repeated at least twice in my program... how can I turn this into a class or some other object?
 
-			puts "To make a move, please type the row and column where you want to make your move:"
-			# Prompting the user for row, so ruby can determine which array to update.
-			puts "Which row? (type a, b, or c)."
-				user_row = gets.chomp
+# Human-move class, so I can call instanes of this rather than repeating it every time I wanna use it.
+class H_Move
+	def initialize
+		puts "To make a move, please type the row and column where you want to make your move:"
+		# Prompting the user for row, so ruby can determine which array to update.
+		puts "Which row? (type a, b, or c)."
+			row = gets.chomp
 
-				while user_row != "a"  && user_row != "b"  && user_row != "c"
-					puts "Hey! Pay attention! Only a, b, or c are valid choices."
-					puts "Which row? (type a, b, or c)."	
-					user_row = gets.chomp
-				end
-			# Prompting the user for column, so ruby can determine which element in the array to update.	
-			puts "Which column? (type 0, 1, or 2)."
-				user_column = gets.to_i		# I found an interesting bug here where entering a letter evaluates as 0 automatically.
-				while user_column != 0  && user_column != 1  && user_column != 2
-					puts "Hey! Follow instructions! Only 0, 1, or 2 are valid choices."
-					puts "Which column? (type 0, 1, or 2)."
-					user_column = gets.to_i
-				end	
+			while row != "a"  && row != "b"  && row != "c"
+				puts "Hey! Pay attention! Only a, b, or c are valid choices."
+				puts "Which row? (type a, b, or c)."	
+				row = gets.chomp
+			end
+		# Prompting the user for column, so ruby can determine which element in the array to update.	
+		puts "Which column? (type 0, 1, or 2)."
+			column = gets.to_i		# I found an interesting bug here where entering a letter evaluates as 0 automatically.
+			while column != 0  && column != 1  && column != 2
+				puts "Hey! Follow instructions! Only 0, 1, or 2 are valid choices."
+				puts "Which column? (type 0, 1, or 2)."
+				column = gets.to_i
+			end	
+	end
+end
 
-=end
+# Computer-move class
+      # COMPUTER MOVE:
 
-      
+class C_move
+	def initialize
+		a.sample.attr_writer(computer)		# although it seems like attr_writer can be chained in this way, it might not be the best way to do this.
+
+# better might be to:
+# randomly select element from array
+# then store that random selection in a(n instance?) variable
+# then delete_at(stored random element)
+# then << (computer)_at(stored random element)
+	end
+end
+
+
 =begin
 a bit stumped right now... I wish I could figure out how to make the game look like this:
 
