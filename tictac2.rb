@@ -45,8 +45,9 @@ class C_Move
 end
 
 # a class to write moves to the gameboard
+# I think I need a way to get the row and column variables to be global, so that this class  can access them
 class Game_update
-	def initialize
+	def initialize # use def human move instead - use method instead of class, scoping issues
 		# writes the gamepiece to the selected coordinates
 		# delete_at removes that element to make space for insert, so as not to get more than 3 elements
 		# insert places the users gamepiece in the selected column
@@ -90,7 +91,7 @@ if mode == "computer"
 	puts ""
 	puts "--------------------------------------------------------------------------------------"
 	puts "Great! Let's play!"
-	puts "Please type 'x' or 'o' to select your player."
+	puts "Please type 'x' or 'o' to select your gamepiece."
 	user = gets.chomp
 
 	while user != 'x' &&  user != 'o'
@@ -185,14 +186,19 @@ Main Game loop must
 
 # To-do:
 
+# use def human_move as a method instead of a class
+# look at scoping issues with variables like row and column (maybe they shouldn't exist everywhere)
+# a[0], b[0], c[0] to check values of columns
+# iterate over arrays to check for win condition after each turn, and then if number of turns >= 8 break the while loop.
+
+
 # Make the human turn code loop until a certain number of turns, trading back and forth with computer turn
 # Solve the problem toggling between human vs computer turn
 # Fix the bug where gets.to_i allows any letter string to evaluate as 0 when prompting for column selection.
 
-# Create an if user == x, then computer == o and vice versa statement somewhere, to make sure
-# 		I can assign the opposite character to the array for each computer move
 
 # Figure out how to limit the new moves to available spaces, so that moves don't overwrite each other.
+# 		perhaps use nil for each element in array, rather than empty space string, so we can evaluate whether or not its empty.
 
 # Write different turn taking mechanism for 2 player mode (toggle between player 1 and 2 turns).
 # 		(will need variables for player 1 and player 2 in human vs human mode.)
